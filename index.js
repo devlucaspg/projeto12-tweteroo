@@ -42,10 +42,12 @@ app.post("/sign-up", (req, res) => {
 
     if (!username || !avatar) {
         res.status(400).send("Todos os campos são obrigatórios!");
+        return;
     }
 
     if (typeof username !== "string" || typeof avatar !== "string") {
         res.sendStatus(400);
+        return;
     }
 
     users.push({ username, avatar });
@@ -59,10 +61,12 @@ app.get("/tweets", (req, res) => {
   
     if (page <= 0) {
         res.status(400).send("Informe uma página válida!");
+        return;
     }
   
     if (page === undefined || page === 1) {
         res.send(tweets.slice(-10).reverse());
+        return;
     }
   
     const start = page * -10;
@@ -81,11 +85,14 @@ app.post("/tweets", (req, res) => {
     const avatar = users.find(user => user.username === username).avatar;
 
     if (!tweet || !username) {
-        return res.status(400).send("Todos os campos são obrigatórios!");
+        res.status(400).send("Todos os campos são obrigatórios!");
+        return;
+
     }
 
     if (typeof username !== "string" || typeof tweet !== "string") {
         res.sendStatus(400);
+        return;
     }
     
     tweets.push({ username, tweet, avatar });
