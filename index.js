@@ -68,7 +68,9 @@ app.get("/tweets", (req, res) => {
     const start = page * -10;
     const end = (page - 1) * -10;
 
-    res.send(tweets.slice(start, end).reverse());
+    const moreTweets = tweets.slice(start, end).reverse();
+
+    res.send(moreTweets);
 
 });
 
